@@ -1,0 +1,53 @@
+<div class="body" style="margin-top: 51px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">
+  <div class="container" style="margin-left: auto 15px;">
+    <div class="row" style="margin-left: -15px; margin-right: -15px;">
+      <div class="col-xs-3">
+       <p>
+        <% if flash[:notice] %>
+          <%= flash[:notice] %>
+        <% end %>
+       </p>
+       <%= render 'books/userinfo_newbook', user: @author, book: @newbook %>
+      </div>
+      <div class="col-xs-9">
+        <h2>Book detail</h2>
+        <table class="table">
+          <thead>
+            <tbody>
+                <tr>
+                  <td>
+                    <%= link_to user_path(@book.user.id) do %>
+                      <%= attachment_image_tag @author, :profile_image, :fill, 50, 50, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+                      <%= @book.user.name %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= link_to book_path(@book.id) do %>
+                      <%= @book.title %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= @book.body %>
+                  </td>
+                  <td>
+                    <% if @book.user == current_user %>
+                      <%= link_to edit_book_path(@book.id), class: "btn btn-success" do %>
+                        <i>Edit</i>
+                      <% end %>
+                    <% end %>
+                   </td>
+                   <td>
+                    <% if @book.user == current_user %>
+                      <%= link_to book_path(@book), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" do %>
+                       Destroy
+                       <% end %>
+                    <% end %>
+                   </td>
+                </tr>
+            </tbody>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

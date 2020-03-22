@@ -1,0 +1,38 @@
+<div class="body" style="margin-top: 51px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">
+  <div class="container" style="margin-left: auto 15px;">
+    <div class="row" style="margin-left: -15px; margin-right: -15px;">
+          <h2 class="form-header-title">User info</h2>
+      </div>
+      <div class="form">
+        <% if @user.errors.any? %>
+          <div id="error_explanation" style="color: red;">
+            <h2><%= @user.errors.count %>error prohibited this obj from being saved:</h2>
+            <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= form_for(@user) do |f| %>
+            <div class="form-group has-icon">
+                <label class="control-label sr-only" for="inputEmail">Name</label>
+                <%= f.text_field :name, autofocus: true, class:"form-control", id:"inputName", placeholder:"名前"%>
+                <span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+            </div>
+            <div class="form-group has-icon">
+              <label class="control-label sr-only" for="inputEmail">Image</label>
+              <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
+            </div>
+            <div class="form-group has-icon">
+                <label class="control-label sr-only" for="inputEmail">Introduction</label>
+                <%= f.text_field :introduction, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"自己紹介"%>
+                <span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+            </div>
+                      <%= f.submit("Update User",class: 'btn btn-default btn-block') %>
+
+            <% end %>
+    </div>
+  </div>
+</div>
